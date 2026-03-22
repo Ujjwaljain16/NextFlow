@@ -62,10 +62,9 @@ export function WorkflowTopBar({ definitions }: WorkflowTopBarProps) {
       if (!workflowId) {
         const created = await createWorkflow(payload.name, payload.nodes, payload.edges);
         setWorkflowMeta(created.id, payload.name);
-        return;
+      } else {
+        await updateWorkflow(workflowId, payload.name, payload.nodes, payload.edges);
       }
-
-      await updateWorkflow(workflowId, payload.name, payload.nodes, payload.edges);
       
       setSuccess("Workflow saved successfully!");
       setTimeout(() => setSuccess(null), 3000);
