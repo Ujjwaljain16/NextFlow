@@ -83,6 +83,7 @@ interface WorkflowState {
     registryMap?: Record<string, UINodeDefinition>,
   ) => void;
   serializeWorkflow: () => { name: string; nodes: SerializableWorkflowNode[]; edges: Edge[] };
+  resetWorkflow: () => void;
   _past: WorkflowSnapshot[];
   _future: WorkflowSnapshot[];
 }
@@ -477,6 +478,22 @@ export const useWorkflowStore = create<WorkflowState>()(
           })),
           edges: state.edges,
         };
+      },
+
+      resetWorkflow: () => {
+        set({
+          workflowId: null,
+          workflowName: "Untitled Workflow",
+          nodes: [],
+          edges: [],
+          selectedNodeId: null,
+          currentRunId: null,
+          currentRunStatus: null,
+          canUndo: false,
+          canRedo: false,
+          _past: [],
+          _future: [],
+        });
       },
     }),
     {

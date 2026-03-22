@@ -1,5 +1,5 @@
 import { auth } from "@clerk/nextjs/server";
-import { WorkflowBuilder } from "@/components/app/workflow-builder";
+import { AppContainer } from "@/components/app/app-container";
 import { LandingSignInButton } from "@/components/app/sign-in-button";
 import Image from "next/image";
 
@@ -7,7 +7,7 @@ export default async function Home() {
   const { userId } = await auth();
 
   if (userId) {
-    return <WorkflowBuilder />;
+    return <AppContainer />;
   }
 
   return (

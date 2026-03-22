@@ -60,3 +60,33 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000 !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #252525 !important;
+  border-radius: 10px;
+  border: 2px solid #000000 !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333333 !important;
+}
+
+::-webkit-scrollbar-button {
+  display: none !important;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #252525 #000000;
+}

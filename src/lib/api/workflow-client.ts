@@ -15,6 +15,8 @@ export interface WorkflowListItem {
   updatedAt: string;
   _count: { runs: number };
   nodeCount: number;
+  nodes?: Array<{ id: string; position: { x: number; y: number } }>;
+  edges?: Array<{ source: string; target: string }>;
 }
 
 export interface WorkflowNodePayload {
@@ -101,6 +103,24 @@ export const updateWorkflow = async (
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, nodes, edges }),
+  });
+
+  await ensureSuccess(response);
+};
+
+export const deleteWorkflow = async (id: string): Promise<void> => {
+  const response = await fetch(`/api/workflows/${id}`, {
+    method: "DELETE",
+  });
+
+  await ensureSuccess(response);
+};
+
+export const renameWorkflow = async (id: string, name: string): Promise<void> => {
+  const response = await fetch(`/api/workflows/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name }),
   });
 
   await ensureSuccess(response);

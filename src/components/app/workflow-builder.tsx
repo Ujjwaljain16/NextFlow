@@ -10,7 +10,7 @@ import { WorkflowTopBar } from "@/components/topbar/workflow-topbar";
 import { SecondaryToolbar } from "@/components/canvas/secondary-toolbar";
 import { AutoSaveManager } from "./auto-save-manager";
 
-export function WorkflowBuilder() {
+export function WorkflowBuilder({ onBackAction }: { onBackAction?: () => void }) {
   const { nodes, isLoading, error } = useNodeCatalog();
 
   useRunPoller();
@@ -53,7 +53,7 @@ export function WorkflowBuilder() {
           {/* Topbar Layer */}
           <div className="absolute top-0 inset-x-0 z-20 pointer-events-none">
             <div className="pointer-events-auto">
-              <WorkflowTopBar />
+              <WorkflowTopBar onBackAction={onBackAction} />
             </div>
           </div>
 

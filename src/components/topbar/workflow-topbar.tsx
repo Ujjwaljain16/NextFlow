@@ -15,7 +15,7 @@ import {
 
 import { WorkflowListModal } from "@/components/panel/workflow-list-modal";
 
-export function WorkflowTopBar() {
+export function WorkflowTopBar({ onBackAction }: { onBackAction?: () => void }) {
   const {
     workflowId,
     workflowName,
@@ -268,12 +268,16 @@ export function WorkflowTopBar() {
               <button
                 type="button"
                 className="hover:bg-[#2A2A2B] flex items-center w-full gap-2 rounded-md px-2 py-2.5 text-[13px] transition-colors duration-100 ease-out text-[#E0E0E0]"
-                onClick={() => { setIsMenuOpen(false); window.location.href = "/"; }}
+                onClick={() => { 
+                   setIsMenuOpen(false); 
+                   if (onBackAction) onBackAction();
+                   else window.location.href = "/"; 
+                }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-70">
                   <path d="m15 18-6-6 6-6"></path>
                 </svg>
-                <span className="font-medium">Back</span>
+                <span className="font-medium">Back to Sessions</span>
               </button>
 
               {/* Load Workflow */}

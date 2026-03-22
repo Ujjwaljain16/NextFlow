@@ -46,6 +46,7 @@ export async function GET(req: Request) {
         id: true,
         name: true,
         nodes: true,
+        edges: true,
         createdAt: true,
         updatedAt: true,
         _count: { select: { runs: true } },
@@ -62,7 +63,9 @@ export async function GET(req: Request) {
       createdAt: w.createdAt,
       updatedAt: w.updatedAt,
       _count: w._count,
-      nodeCount: Array.isArray(w.nodes) ? w.nodes.length : 0
+      nodeCount: Array.isArray(w.nodes) ? w.nodes.length : 0,
+      nodes: (w.nodes as Array<{ id: string; position: { x: number; y: number } }>)?.map((n) => ({ id: n.id, position: n.position })),
+      edges: (w.edges as Array<{ source: string; target: string; sourceHandle: string; targetHandle: string }>)?.map((e) => ({ source: e.source, target: e.target }))
     }));
 
     return NextResponse.json({ workflows: formattedItems, nextCursor });
