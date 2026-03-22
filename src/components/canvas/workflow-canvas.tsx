@@ -24,6 +24,7 @@ import { NodePicker } from "./node-picker";
 import { CanvasErrorBoundary } from "@/components/error-boundary";
 import { useState, useRef } from "react";
 import { NodeContextMenu } from "./node-context-menu";
+import { NodeDefinitionProvider } from "@/components/nodes/node-definition-context";
 
 interface WorkflowCanvasProps {
   definitions: UINodeDefinition[];
@@ -239,7 +240,8 @@ export function WorkflowCanvas({ definitions }: WorkflowCanvasProps) {
       style={{ cursor: canvasMode === "cut" ? "crosshair" : "default" }}
       onMouseMove={onMouseMove}
     >
-      <CanvasErrorBoundary>
+      <NodeDefinitionProvider definitions={definitions}>
+        <CanvasErrorBoundary>
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -285,6 +287,7 @@ export function WorkflowCanvas({ definitions }: WorkflowCanvasProps) {
           <Controls style={{ display: "none" }} />
         </ReactFlow>
       </CanvasErrorBoundary>
+    </NodeDefinitionProvider>
 
       {/* Context Menu */}
       {contextMenu && (

@@ -10,6 +10,7 @@ import {
   STATUS_OUTLINE_CLASS_MAP,
   getHandleStyle
 } from "./node-utils";
+import { useNodeDefinition } from "./node-definition-context";
 
 // ── NodeShell — card + floating title + handles ───────────────────────────────
 interface NodeShellProps {
@@ -19,7 +20,16 @@ interface NodeShellProps {
   children: React.ReactNode;
 }
 function NodeShell({ data, selected, children }: Omit<NodeShellProps, "connectedInputIds">) {
-  const definition = data.definition;
+  const definition = useNodeDefinition(data.definitionId);
+
+  if (!definition) {
+    return (
+      <div className="w-64 h-32 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center">
+        <div className="size-4 animate-spin rounded-full border-2 border-white/20 border-t-white" />
+      </div>
+    );
+  }
+
   return (
     <div className="relative">
       {/* Floating title */}
@@ -353,7 +363,7 @@ export const LLMNodeComponent = memo(function LLMNode({ id, data, selected }: No
 
           {/* Connected input indicators */}
           <div className="flex flex-col gap-0.5">
-            {data.definition.inputs.map((inp) => {
+            {useNodeDefinition(data.definitionId)?.inputs.map((inp) => {
               const isConnected = connectedInputIds.has(inp.id);
               return (
                 <div key={inp.id} className={cn(

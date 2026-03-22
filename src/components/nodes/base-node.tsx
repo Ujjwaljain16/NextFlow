@@ -5,6 +5,7 @@ import { Handle, Position, type NodeProps } from "reactflow";
 import { cn } from "@/lib/utils/cn";
 import { Copy, Edit2 } from "lucide-react";
 import { type WorkflowNodeData } from "@/store/workflow-store";
+import { useNodeDefinition } from "./node-definition-context";
 import {
   STATUS_OUTLINE_CLASS_MAP,
   getHandleStyle
@@ -15,9 +16,15 @@ export interface BaseNodeProps extends NodeProps<WorkflowNodeData> {
 }
 
 function BaseNode({ data, selected, onConfigChange }: BaseNodeProps) {
-  const definition = data.definition;
+  const definition = useNodeDefinition(data.definitionId);
 
-  if (!definition) return null;
+  if (!definition) {
+    return (
+      <div className="w-64 h-32 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center">
+        <div className="size-4 animate-spin rounded-full border-2 border-white/20 border-t-white" />
+      </div>
+    );
+  }
 
   const handleConfigChange = (key: string, value: string) => {
     if (onConfigChange) onConfigChange(key, value);

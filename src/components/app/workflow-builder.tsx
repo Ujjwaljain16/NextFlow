@@ -8,6 +8,7 @@ import { WorkflowCanvas } from "@/components/canvas/workflow-canvas";
 import { RightPanel } from "@/components/panel/right-panel";
 import { WorkflowTopBar } from "@/components/topbar/workflow-topbar";
 import { SecondaryToolbar } from "@/components/canvas/secondary-toolbar";
+import { AutoSaveManager } from "./auto-save-manager";
 
 export function WorkflowBuilder() {
   const { nodes, isLoading, error } = useNodeCatalog();
@@ -32,6 +33,7 @@ export function WorkflowBuilder() {
 
   return (
     <ReactFlowProvider>
+      <AutoSaveManager />
       <main className="absolute inset-0 w-full h-full overflow-hidden bg-[#0A0A0A] text-zinc-100 flex">
         
         {/* Left Sidebar Dock Layer (Pushes Canvas on desktop, Overlays on mobile) */}
@@ -51,7 +53,7 @@ export function WorkflowBuilder() {
           {/* Topbar Layer */}
           <div className="absolute top-0 inset-x-0 z-20 pointer-events-none">
             <div className="pointer-events-auto">
-              <WorkflowTopBar definitions={nodes} />
+              <WorkflowTopBar />
             </div>
           </div>
 

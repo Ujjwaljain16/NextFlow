@@ -30,7 +30,7 @@ function NodeRenderer(props: NodeProps<WorkflowNodeData>) {
     updateNode(props.id, { [key]: value });
   };
 
-  const definitionId = props.data?.definition?.id;
+  const definitionId = props.data?.definitionId;
   const SpecializedComponent = definitionId ? SPECIALIZED[definitionId] : undefined;
   const isDisabled = props.data?.disabled;
 

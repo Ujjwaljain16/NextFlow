@@ -11,15 +11,11 @@ import {
   runWorkflow,
   updateWorkflow,
 } from "@/lib/api/workflow-client";
-import type { UINodeDefinition } from "@/lib/types/workflow-ui";
+
 
 import { WorkflowListModal } from "@/components/panel/workflow-list-modal";
 
-interface WorkflowTopBarProps {
-  definitions: UINodeDefinition[];
-}
-
-export function WorkflowTopBar({ definitions }: WorkflowTopBarProps) {
+export function WorkflowTopBar() {
   const {
     workflowId,
     workflowName,
@@ -49,7 +45,7 @@ export function WorkflowTopBar({ definitions }: WorkflowTopBarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isListModalOpen, setIsListModalOpen] = useState(false);
 
-  const registryMap = Object.fromEntries(definitions.map((definition) => [definition.id, definition]));
+
 
   const handleSave = async () => {
     try {
@@ -99,8 +95,7 @@ export function WorkflowTopBar({ definitions }: WorkflowTopBarProps) {
               edge.id ??
               `${edge.source}:${edge.sourceHandle ?? "source"}->${edge.target}:${edge.targetHandle ?? "target"}:${index}`,
           })),
-        },
-        registryMap,
+        }
       );
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to load workflow");
@@ -200,8 +195,7 @@ export function WorkflowTopBar({ definitions }: WorkflowTopBarProps) {
               edge.id ??
               `${edge.source}:${edge.sourceHandle ?? "source"}->${edge.target}:${edge.targetHandle ?? "target"}:${index}`,
           })),
-        },
-        registryMap,
+        }
       );
       setWorkflowMeta(workflow.id, workflow.name);
       event.target.value = "";
