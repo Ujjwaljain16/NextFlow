@@ -7,6 +7,14 @@ const nextConfig: NextConfig = {
     root: "./",
   },
   serverExternalPackages: ["@prisma/client"],
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "img.clerk.com",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

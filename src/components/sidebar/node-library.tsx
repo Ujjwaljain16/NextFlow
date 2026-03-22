@@ -129,6 +129,100 @@ export function NodeLibrary({ definitions }: NodeLibraryProps) {
           )}
         </div>
       </div>
+      {/* User Profile / Logout Section */}
+      <div className="mt-auto border-t border-[#1A1A1A] p-2 shrink-0">
+        <SidebarUserButton collapsed={sidebarCollapsed} />
+      </div>
+    </div>
+  );
+}
+
+import { useUser, SignOutButton } from "@clerk/nextjs";
+import { ChevronUp, LogOut, Settings, CreditCard, User } from "lucide-react";
+import Image from "next/image";
+
+function SidebarUserButton({ collapsed }: { collapsed: boolean }) {
+  const { user, isLoaded } = useUser();
+  const [isOpen, setIsOpen] = useState(false);
+
+  if (!isLoaded || !user) return null;
+
+  return (
+    <div className="relative">
+      {/* Dropdown Menu (Simple implementation for now) */}
+      {isOpen && (
+        <div 
+          className="absolute bottom-full left-0 mb-2 w-56 rounded-lg border border-[#333333] bg-[#0A0A0A] p-1 shadow-2xl z-50 animate-in fade-in slide-in-from-bottom-2"
+          onMouseLeave={() => setIsOpen(false)}
+        >
+          <div className="px-2 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-[#666666]">
+            Account
+          </div>
+          
+          <div className="space-y-0.5">
+            <button className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm text-[#AAAAAA] hover:bg-[#1A1A1A] hover:text-white transition-colors cursor-pointer">
+              <User size={14} />
+              Profile
+            </button>
+            <button className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm text-[#AAAAAA] hover:bg-[#1A1A1A] hover:text-white transition-colors cursor-pointer">
+              <Settings size={14} />
+              Settings
+            </button>
+            <button className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm text-[#AAAAAA] hover:bg-[#1A1A1A] hover:text-white transition-colors cursor-pointer">
+              <CreditCard size={14} />
+              Billing
+            </button>
+          </div>
+
+          <div className="my-1 border-t border-[#1A1A1A]" />
+          
+          <SignOutButton>
+            <button className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors cursor-pointer text-left">
+              <LogOut size={14} />
+              Log out
+            </button>
+          </SignOutButton>
+        </div>
+      )}
+
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className={cn(
+          "flex w-full items-center gap-3 rounded-lg border border-transparent p-2 text-start transition-all hover:bg-[#1A1A1A] group/user-btn cursor-pointer",
+          collapsed ? "justify-center" : "px-3"
+        )}
+      >
+        <div className="relative flex shrink-0 overflow-hidden size-8 rounded-lg border border-[#333333] bg-[#111111]">
+          {user.imageUrl ? (
+            <Image
+              src={user.imageUrl} 
+              alt={user.fullName ?? "User"} 
+              width={32}
+              height={32}
+              className="size-full object-cover"
+            />
+          ) : (
+            <div className="flex size-full items-center justify-center bg-zinc-800 text-[10px] font-bold">
+              {user.firstName?.charAt(0) ?? "U"}
+            </div>
+          )}
+        </div>
+
+        {!collapsed && (
+          <>
+            <div className="grid flex-1 text-start leading-tight">
+              <span className="truncate text-sm font-medium text-white">
+                {user.fullName || user.username || "User"}
+              </span>
+              <span className="text-[10px] font-medium text-zinc-500 uppercase tracking-wider">
+                Free Plan
+              </span>
+            </div>
+            <ChevronUp size={14} className="text-zinc-500 transition-transform group-hover/user-btn:translate-y-[-2px] group-hover/user-btn:text-zinc-300" />
+          </>
+        )}
+      </button>
     </div>
   );
 }
