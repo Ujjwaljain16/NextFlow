@@ -1,0 +1,137 @@
+You are a senior frontend engineer implementing the Node UI for a DAG-based workflow builder using React Flow.
+
+The backend execution engine is fully complete. You must ONLY implement the visual node system.
+
+---
+
+## GOAL
+
+Build a BaseNode component that matches Krea-style UI:
+
+* compact
+* minimal
+* visually precise
+* fully dynamic based on NodeDefinition
+
+---
+
+## REQUIREMENTS
+
+### 1. Create BaseNode Component
+
+File:
+`/components/nodes/base-node.tsx`
+
+---
+
+### 2. Layout Structure
+
+Node must have:
+
+1. Preview section (top)
+2. Header row (model + metadata)
+3. Output row (right handle)
+4. Input section (left handle + inputs)
+5. Optional expandable settings
+
+---
+
+### 3. Styling Rules
+
+* width: w-64 (256px)
+* rounded-xl (12px)
+* dark background (zinc-900)
+* text-xs
+* minimal padding
+
+---
+
+### 4. Handles (CRITICAL)
+
+Use React Flow Handle:
+
+* size: w-2.5 h-2.5
+* rounded-full
+* ring around handle
+* hover scale effect
+
+Position:
+
+* inputs → left
+* outputs → right
+
+Handles must be dynamically rendered from NodeDefinition.
+
+---
+
+### 5. Dynamic Inputs
+
+Render inputs from Zod schema:
+
+* textarea for text
+* dropdown for enums
+* file input for images
+
+DO NOT hardcode fields.
+
+---
+
+### 6. Textarea Styling
+
+* bg: subtle (zinc-800)
+* text-xs
+* rounded-sm
+* px-1.5 py-1
+* border-bottom only
+* focus:ring-1
+* resize-y on hover
+
+---
+
+### 7. State Styling
+
+Map NodeRun status:
+
+* RUNNING → blue glow
+* SUCCESS → green border
+* FAILED → red border
+
+---
+
+### 8. Clean Architecture
+
+* Node UI must be purely visual
+* No API calls
+* No DB logic
+* All data passed via props
+
+---
+
+### 9. File Structure
+
+/components/nodes/
+base-node.tsx
+node-handles.tsx
+
+---
+
+## IMPORTANT RULES
+
+* DO NOT copy raw DOM
+* DO NOT over-style
+* DO NOT introduce new architecture
+* KEEP IT MINIMAL AND PRECISE
+
+---
+
+## OUTPUT EXPECTATION
+
+* BaseNode component
+* Dynamic handles
+* Dynamic input rendering
+* Clean Tailwind styling
+
+---
+
+Goal:
+A clean, production-ready Node UI matching Krea’s density, spacing, and behavior.
