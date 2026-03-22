@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: "./",
   },
+  serverExternalPackages: ["@prisma/client"],
 };
 
 export default nextConfig;
