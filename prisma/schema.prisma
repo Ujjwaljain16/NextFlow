@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum WorkflowRunStatus {
+  PENDING
+  RUNNING
+  SUCCESS
+  FAILED
+  CANCELED
+}
+
+enum NodeRunStatus {
+  PENDING
+  RUNNING
+  SUCCESS
+  FAILED
+}
+
+model Workflow {
+  id        String        @id @default(cuid())
+  userId    String
+  name      String
+  nodes     Json
+  edges     Json
+  runs      WorkflowRun[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([userId])
+}
+
+model WorkflowRun {
+  id             String            @id @default(cuid())
+  workflowId     String
+  userId         String
+  status         WorkflowRunStatus @default(PENDING)
+  scope          String            @default("full")   // "full" | "partial" | "single"
+  executionGraph Json              // { adjacencyList: {}, reverseAdjacencyList: {} }
+  startedAt      DateTime          @default(now())
+  completedAt    DateTime?
+  
+  workflow       Workflow          @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  nodeRuns       NodeRun[]
+
+  @@index([userId])         // Fix 3.4: Query runs by user (history sidebar)
+  @@index([workflowId])     // Fix 3.9: List runs for a specific workflow
+  @@index([status])
+}
+
+model NodeRun {
+  id            String        @id @default(cuid())
+  workflowRunId String
+  nodeId        String
+  status        NodeRunStatus @default(PENDING)
+  inputs        Json?
+  outputs       Json?
+  error         String?
+  startedAt     DateTime?
+  completedAt   DateTime?
+
+  workflowRun   WorkflowRun   @relation(fields: [workflowRunId], references: [id], onDelete: Cascade)
+
+  @@unique([workflowRunId, nodeId])
+  @@index([workflowRunId, status])
+  // Fix 4.6: Removed @@index([workflowRunId, nodeId, status]) — redundant given the unique constraint
+  //          which already creates an index on (workflowRunId, nodeId).
+  //          @@index([workflowRunId, status]) covers the remaining query pattern.
+}
