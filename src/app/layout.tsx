@@ -14,8 +14,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NextFlow",
-  description: "DAG-based AI workflow execution engine",
+  title: "NextFlow | High-Performance AI Orchestration",
+  description: "Next-generation DAG-based AI workflow engine with real-time execution and premium aesthetics.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

@@ -24,6 +24,19 @@
   --color-primary-900: #18181b;
   --color-primary-975: #09090b;
   --color-primary-1000: #000000;
+
+  --animate-pulse-slow: pulse-slow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.05);
+    }
+  }
 }
 
 @utility thin-border {
