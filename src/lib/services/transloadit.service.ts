@@ -26,27 +26,22 @@ export class TransloaditService {
       uploads: {
         [fileName]: fileBuffer
       },
+      // FIX: No steps needed for a simple upload-and-get-URL. 
+      // This avoids ASSEMBLY_STEP_UNKNOWN_ROBOT errors caused by invalid robots like /file/store.
       params: {
-        steps: {
-          // Pass-through: store the original file as-is
-          store: {
-            use: ":original",
-            robot: "/file/store",
-          },
-        },
+        auth: { key: authKey }
       },
-      // FIX: Use SDK's built-in polling — reliable in Trigger.dev cloud workers (no Windows hang issues)
       waitForCompletion: true,
     };
 
     try {
       const result = await client.createAssembly(options);
 
-      // FIX: Correct step result key matches the 'store' step defined above
+      // FIX: Since we're not using a 'store' step anymore, prioritize the arrivals/uploads array
       const uploadedUrl =
-        result?.results?.store?.[0]?.ssl_url ||
+        result?.uploads?.[0]?.ssl_url ||
         result?.results?.[":original"]?.[0]?.ssl_url ||
-        result?.uploads?.[0]?.ssl_url;
+        result?.results?.store?.[0]?.ssl_url;
 
       if (!uploadedUrl) {
         throw new Error(
