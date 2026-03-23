@@ -114,7 +114,7 @@ async function main() {
   console.clear();
   console.log("🧪 Starting Advanced E2E Scenarios\n");
 
-  // SCENARIO 1: FAN-IN
+  // FAN-IN
   // N1 & N2 output text. N3 waits for both, then combines them natively.
   await runScenario(
     "Strict Fan-In Dependency",
@@ -129,7 +129,7 @@ async function main() {
     ]
   );
 
-  // SCENARIO 2: FAILURE PROPAGATION
+  // FAILURE PROPAGATION
   // N1 connects to N2 (which Hard Fails). N3 depends on N2.
   // Expected: N1(SUCCESS) -> N2(FAILED) -> N3(never runs), Workflow(FAILED)
   await runScenario(
@@ -145,7 +145,7 @@ async function main() {
     ]
   );
 
-  // SCENARIO 3: TRANSIENT ERROR RETRY RECOVERY
+  // TRANSIENT ERROR RETRY RECOVERY
   // N1 (transient) recovers after 2 throws -> N2 executes normally.
   await runScenario(
     "Transient Error Retry Recovery",

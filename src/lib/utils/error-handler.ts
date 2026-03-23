@@ -12,8 +12,6 @@ export class GlobalErrorHandler {
     if (error instanceof z.ZodError) return ErrorCategory.VALIDATION;
     
     const message = error instanceof Error ? error.message : String(error);
-    
-
     if (
       message.includes("Missing Data") || 
       message.includes("Cascading Failure") ||
@@ -64,7 +62,7 @@ export class GlobalErrorHandler {
           completedAt: new Date(),
         },
       });
-      return true; // Was handled as terminal
+      return true;
     }
 
     // For transient errors that aren't the final attempt, we reset to PENDING
@@ -74,6 +72,6 @@ export class GlobalErrorHandler {
       data: { status: "PENDING" },
     });
     
-    return false; // Handled as transient
+    return false;
   }
 }

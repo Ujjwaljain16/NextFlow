@@ -108,12 +108,5 @@ NextFlow comes with a pre-built demo demonstrating building a marketing kit from
 2. **Branch II**: Upload product video → Extract key frame.
 3. **Convergence**: Final LLM node synthesizes copied text and both visual assets into a social media post.
 
----
-
-## 📜 License
-
-This project is private and for demonstration purposes.
 
 ---
-
-Built with ❤️ by the NextFlow Team.

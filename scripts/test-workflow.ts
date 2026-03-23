@@ -15,7 +15,7 @@ async function main() {
   console.log("   NextFlow DAG Execution Engine Test    ");
   console.log("=========================================\n");
 
-  // 1. Create a simple workflow DAG with 3 components in a linear chain
+  // Create a simple workflow DAG with 3 components in a linear chain
   const nodes = [
     { id: "node1", type: "core.text", data: { text: "Hello" }, position: { x: 0, y: 0 } },
     { id: "node2", type: "core.text", data: { text: " Middle" }, position: { x: 200, y: 0 } },
@@ -58,7 +58,7 @@ async function main() {
       },
     });
 
-    // Identify the entry nodes natively
+
     const entryNodes = Object.keys(executionGraph.nodes).filter(
       (id) => executionGraph.reverseAdjacencyList[id].length === 0
     );

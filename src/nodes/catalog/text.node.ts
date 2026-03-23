@@ -30,5 +30,5 @@ export const TextNode: NodeDefinition<typeof configSchema, typeof inputSchema, t
   },
 };
 
-// Auto-register upon import
+
 Registry.register(TextNode);

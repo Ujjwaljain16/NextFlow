@@ -32,7 +32,7 @@ export const TestChaosNode: NodeDefinition<typeof configSchema, typeof inputSche
   outputs: [{ id: "out", name: "Output", type: "text" }],
 
   execute: async (inputs, config) => {
-    // Determine context safely
+
     if (config.mode === "fan_in") {
       return { out: `COMBINED: ${inputs.in1} AND ${inputs.in2}` };
     }
@@ -48,7 +48,7 @@ export const TestChaosNode: NodeDefinition<typeof configSchema, typeof inputSche
       if (globalRetryCount <= 2) {
         throw new Error(`[Transient Error] Simulated network drop (Attempt ${globalRetryCount})`);
       }
-      globalRetryCount = 0; // Reset safely
+
       return { out: "Success after recovering from 2 retries" };
     }
 

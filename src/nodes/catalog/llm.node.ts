@@ -53,7 +53,7 @@ export const LLMNode: NodeDefinition<typeof configSchema, typeof inputSchema, ty
 
     // Rate limiting is handled by the gemini-quota queue (concurrency: 1) in dag.ts
 
-    // Build content parts: text + optional images
+
     const parts: Array<{ text: string } | { inlineData: { data: string; mimeType: string } }> = [
       { text: inputs.user_message },
     ];
@@ -78,5 +78,5 @@ export const LLMNode: NodeDefinition<typeof configSchema, typeof inputSchema, ty
   },
 };
 
-// Auto-register upon import
+
 Registry.register(LLMNode);

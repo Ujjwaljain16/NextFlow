@@ -50,8 +50,8 @@ model WorkflowRun {
   workflow       Workflow          @relation(fields: [workflowId], references: [id], onDelete: Cascade)
   nodeRuns       NodeRun[]
 
-  @@index([userId])         // Fix 3.4: Query runs by user (history sidebar)
-  @@index([workflowId])     // Fix 3.9: List runs for a specific workflow
+  @@index([userId])         // Query runs by user (history sidebar)
+  @@index([workflowId])     // List runs for a specific workflow
   @@index([status])
 }
 
@@ -70,7 +70,7 @@ model NodeRun {
 
   @@unique([workflowRunId, nodeId])
   @@index([workflowRunId, status])
-  // Fix 4.6: Removed @@index([workflowRunId, nodeId, status]) — redundant given the unique constraint
-  //          which already creates an index on (workflowRunId, nodeId).
-  //          @@index([workflowRunId, status]) covers the remaining query pattern.
+  // Removed @@index([workflowRunId, nodeId, status]) — redundant given the unique constraint
+  // which already creates an index on (workflowRunId, nodeId).
+  // @@index([workflowRunId, status]) covers the remaining query pattern.
 }

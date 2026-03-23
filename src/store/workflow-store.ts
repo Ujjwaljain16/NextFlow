@@ -79,7 +79,6 @@ interface WorkflowState {
       nodes: Array<{ id: string; type: string; data?: Record<string, unknown>; position?: XYPosition }>;
       edges: Edge[];
     },
-    // registryMap is now optional or can be ignored for definitions
     registryMap?: Record<string, UINodeDefinition>,
   ) => void;
   serializeWorkflow: () => { name: string; nodes: SerializableWorkflowNode[]; edges: Edge[] };
@@ -263,7 +262,7 @@ export const useWorkflowStore = create<WorkflowState>()(
         const nextPast = [...state._past, { nodes: state.nodes, edges: state.edges }].slice(-MAX_HISTORY);
 
         // PRD specifies animated purple edges
-        const EDGE_COLOR = "rgb(168, 85, 247)"; // purple-500
+        const EDGE_COLOR = "rgb(168, 85, 247)";
 
         set((state) => ({
           edges: addEdge(
@@ -409,7 +408,7 @@ export const useWorkflowStore = create<WorkflowState>()(
 
       clearCanvas: () => {
         const state = get();
-        if (state.nodes.length === 0) return; // Nothing to clear
+        if (state.nodes.length === 0) return;
         
         const nextPast = [...state._past, { nodes: state.nodes, edges: state.edges }].slice(-MAX_HISTORY);
         
@@ -432,7 +431,7 @@ export const useWorkflowStore = create<WorkflowState>()(
             position: node.position ?? { x: 100, y: 100 },
             data: {
               definitionId: node.type,
-              label: node.id, // Will be updated on rename if needed
+              label: node.id,
               config: (node.data ?? {}) as Record<string, unknown>,
               status: "IDLE",
               lastOutput: undefined,

@@ -66,7 +66,7 @@ async function runNode(payload: { workflowRunId: string; nodeId: string }, isDel
 
   const isLlmNode = targetNodeMetadata.type.includes("llm");
 
-  // 1. CONDITIONAL RUNNING TRANSITION (Idempotency Guard)
+  // CONDITIONAL RUNNING TRANSITION (Idempotency Guard)
   // Ensures that ONLY PENDING nodes (or manually restarted FAILED nodes) execute.
   const transition = await prisma.nodeRun.updateMany({
     where: {

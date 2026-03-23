@@ -15,14 +15,14 @@ let isInitialized = false;
 export function setupFFmpeg() {
   if (isInitialized) return;
   
-  // 1. Check if FFMPEG_PATH is already set (e.g. by Trigger.dev extension in prod)
+  // Check if FFMPEG_PATH is already set (e.g. by Trigger.dev extension in prod)
   if (process.env.FFMPEG_PATH) {
     ffmpeg.setFfmpegPath(process.env.FFMPEG_PATH);
     isInitialized = true;
     return;
   }
 
-  // 2. Try to use ffmpeg-static, but validate the path at runtime.
+  // Try to use ffmpeg-static, but validate the path at runtime.
   if (ffmpegStatic) {
     if (fs.existsSync(ffmpegStatic)) {
       ffmpeg.setFfmpegPath(ffmpegStatic);
@@ -39,6 +39,6 @@ export function setupFFmpeg() {
     }
   }
 
-  // 3. Fallback to system 'ffmpeg'. 
+  // Fallback to system 'ffmpeg'. 
   isInitialized = true;
 }

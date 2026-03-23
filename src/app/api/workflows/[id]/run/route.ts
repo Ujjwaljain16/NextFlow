@@ -101,7 +101,7 @@ export async function POST(
       return NextResponse.json({ error: "NO_ENTRY_NODES" }, { status: 400 });
     }
 
-    // 2. Transaction Boundary
+    // Transaction Boundary
     const runRecord = await prisma.$transaction(async (tx) => {
       const run = await tx.workflowRun.create({
         data: {
@@ -124,7 +124,7 @@ export async function POST(
       return run;
     });
 
-    // 3. Execution (The Single Point of Trigger)
+    // Execution (The Single Point of Trigger)
     try {
       await executeNodeTask.batchTrigger(
         entryNodes.map(node => ({

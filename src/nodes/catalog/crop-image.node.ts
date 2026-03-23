@@ -44,7 +44,7 @@ export const CropImageNode: NodeDefinition<typeof configSchema, typeof inputSche
   outputs: [{ id: "output", name: "Cropped Image URL", type: "image" }],
 
   execute: async (inputs, config) => {
-    // Lazy-initialize FFmpeg path
+
     setupFFmpeg();
 
     const imageUrl = inputs.image_url;
@@ -79,7 +79,7 @@ export const CropImageNode: NodeDefinition<typeof configSchema, typeof inputSche
           try {
             const finalUrl = await TransloaditService.uploadLocalFile(outputTempFile);
             
-            // Clean up
+
             await fs.unlink(inputTempFile).catch(() => {});
             await fs.unlink(outputTempFile).catch(() => {});
             

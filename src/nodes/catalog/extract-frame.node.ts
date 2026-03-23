@@ -37,7 +37,7 @@ export const ExtractFrameNode: NodeDefinition<typeof configSchema, typeof inputS
   outputs: [{ id: "output", name: "Extracted Frame (Base64)", type: "image" }],
 
   execute: async (inputs, config) => {
-    // Lazy-initialize FFmpeg path
+
     setupFFmpeg();
 
     const videoUrl = inputs.video_url;

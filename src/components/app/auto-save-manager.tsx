@@ -21,7 +21,7 @@ export function AutoSaveManager() {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Only auto-save if we have a workflow ID (it's already been saved once)
+
     if (!workflowId) return;
 
     const payload = serializeWorkflow();
@@ -31,15 +31,15 @@ export function AutoSaveManager() {
       edges: payload.edges,
     });
 
-    // Skip if nothing changed since last save
+
     if (currentJson === lastSavedJson.current) return;
 
-    // Clear existing timeout
+
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
 
-    // Debounce save
+
     timeoutRef.current = setTimeout(async () => {
       try {
         setIsSaving(true);
@@ -51,14 +51,14 @@ export function AutoSaveManager() {
       } finally {
         setIsSaving(false);
       }
-    }, 2000); // 2 second debounce
+    }, 2000);
 
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, [nodes, edges, workflowName, workflowId, serializeWorkflow]);
 
-  // Headless component - could return a small "Saved" indicator in the corner if needed
+
   if (!isSaving) return null;
 
   return (

@@ -30,7 +30,7 @@ interface WorkflowCanvasProps {
   definitions: UINodeDefinition[];
 }
 
-// Node and edge types are defined outside the component to ensure total reference stability
+
 import { nodeTypesGlobal, edgeTypesGlobal } from "./flow-types";
 
 export function WorkflowCanvas({ definitions }: WorkflowCanvasProps) {
@@ -61,7 +61,7 @@ export function WorkflowCanvas({ definitions }: WorkflowCanvasProps) {
     })),
   );
 
-  // In cut mode: clicking an edge removes it
+
   const removeEdge = useWorkflowStore((s) => s.removeEdge);
 
   const definitionMap = useMemo(() => {
@@ -96,7 +96,7 @@ export function WorkflowCanvas({ definitions }: WorkflowCanvasProps) {
       }
 
       if (sourceHandle.type === targetHandle.type) {
-        // ── DAG cycle check ──────────────────────────────────────────────────
+
         // DFS from target along existing edges to prevent cycles
         const buildAdj = () => {
           const adj: Record<string, string[]> = {};
@@ -118,7 +118,7 @@ export function WorkflowCanvas({ definitions }: WorkflowCanvasProps) {
         };
         dfs(connection.target);
         if (reachableFromTarget.has(connection.source)) {
-          return false; // Would create a cycle
+
         }
         return true;
       }
@@ -196,7 +196,7 @@ export function WorkflowCanvas({ definitions }: WorkflowCanvasProps) {
     const now = Date.now();
     setContextMenu(null);
     if (now - lastClickTime.current < 300) {
-      // Double click
+
       setPickerPos({ x: event.clientX, y: event.clientY });
     } else {
       setSelectedNode(null);
@@ -267,10 +267,10 @@ export function WorkflowCanvas({ definitions }: WorkflowCanvasProps) {
           onDrop={handleDrop}
           connectionMode={ConnectionMode.Loose}
         >
-          {/* Subtle background dot grid matching Krea */}
+
           <Background variant={BackgroundVariant.Dots} color="#333333" gap={20} size={1.5} />
 
-          {/* Mini map - styled to match dark theme */}
+
           <MiniMap
             pannable
             zoomable
@@ -280,7 +280,7 @@ export function WorkflowCanvas({ definitions }: WorkflowCanvasProps) {
             maskColor="rgba(0,0,0,0.5)"
           />
 
-          {/* Hide default controls - use custom floating controls instead */}
+
           <Controls style={{ display: "none" }} />
         </ReactFlow>
       </CanvasErrorBoundary>

@@ -41,30 +41,30 @@ export function WorkflowBuilder({ onBackAction }: { onBackAction?: () => void })
           <NodeLibrary definitions={nodes} />
         </div>
 
-        {/* Main Canvas Area */}
+
         <div className="flex-1 relative h-full">
-          {/* Layer 0: Full Screen Canvas */}
+
           <div className="absolute inset-0 z-0">
             <WorkflowCanvas definitions={nodes} />
           </div>
 
-          {/* Layer 1: Floating UI Elements */}
+
           
-          {/* Topbar Layer */}
+
           <div className="absolute top-0 inset-x-0 z-20 pointer-events-none">
             <div className="pointer-events-auto">
               <WorkflowTopBar onBackAction={onBackAction} />
             </div>
           </div>
 
-          {/* Bottom Left: Secondary Toolbar */}
+
           <div className="absolute bottom-6 left-6 z-20 pointer-events-none">
             <div className="pointer-events-auto">
               <SecondaryToolbar definitions={nodes} />
             </div>
           </div>
 
-          {/* Right Panel Layer (if active) */}
+
           <div className="absolute top-0 bottom-0 right-0 z-20 pointer-events-none">
             <div className="pointer-events-auto h-full">
               <RightPanel />
