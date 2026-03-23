@@ -93,7 +93,7 @@ export class GraphService {
       }
     });
 
-    // 3. Deterministic Sorting Guarantee
+    // Deterministic Sorting Guarantee
     // Orders outputs dynamically based purely on alphanumeric ID value 
     for (const key in adjacencyList) {
       adjacencyList[key].sort();
@@ -102,7 +102,7 @@ export class GraphService {
       reverseAdjacencyList[key].sort();
     }
 
-    // 4. Mathematical Cycle Detection Filter (DFS recursive loop analysis)
+    // Mathematical Cycle Detection Filter (DFS recursive loop analysis)
     const visited = new Set<string>();
     const recursionStack = new Set<string>();
 
