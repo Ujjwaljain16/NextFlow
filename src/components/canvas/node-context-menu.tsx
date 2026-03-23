@@ -174,7 +174,7 @@ export function NodeContextMenu({ x, y, nodeId, onClose }: NodeContextMenuProps)
         </div>
       ) : (
         <>
-          {/* Run Node */}
+
           <button
             onClick={handleRunNode}
             className="flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors hover:bg-primary-150 outline-none dark:hover:bg-primary-850"
@@ -189,7 +189,7 @@ export function NodeContextMenu({ x, y, nodeId, onClose }: NodeContextMenuProps)
 
           <div className="-mx-1 my-1.5 h-px bg-primary-150 dark:bg-primary-850" />
 
-          {/* Download Result */}
+
           <button
             disabled={!node.data.lastOutput}
             className="flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors hover:bg-primary-150 outline-none disabled:opacity-30 dark:hover:bg-primary-850"
@@ -217,7 +217,7 @@ export function NodeContextMenu({ x, y, nodeId, onClose }: NodeContextMenuProps)
             </div>
           </button>
 
-          {/* Duplicate */}
+
           <button
             onClick={() => { duplicateNode(nodeId); onClose(); }}
             className="flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors hover:bg-primary-150 outline-none dark:hover:bg-primary-850"
@@ -230,7 +230,7 @@ export function NodeContextMenu({ x, y, nodeId, onClose }: NodeContextMenuProps)
             </div>
           </button>
 
-          {/* Rename */}
+
           <button
             onClick={() => { setIsRenaming(true); setNewName(node.data.label); }}
             className="flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors hover:bg-primary-150 outline-none dark:hover:bg-primary-850"
@@ -242,7 +242,7 @@ export function NodeContextMenu({ x, y, nodeId, onClose }: NodeContextMenuProps)
             </div>
           </button>
 
-          {/* Disable Node */}
+
           <button
             onClick={() => { toggleNodeDisabled(nodeId); onClose(); }}
             className="flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors hover:bg-primary-150 outline-none dark:hover:bg-primary-850"
@@ -262,7 +262,7 @@ export function NodeContextMenu({ x, y, nodeId, onClose }: NodeContextMenuProps)
 
           <div className="-mx-1 my-1.5 h-px bg-primary-150 dark:bg-primary-850" />
 
-          {/* Delete */}
+
           <button
             onClick={() => { removeNode(nodeId); onClose(); }}
             className="flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-sm text-red-600 transition-colors hover:bg-red-200 outline-none dark:text-red-400 dark:hover:bg-red-900/30"

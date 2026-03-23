@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "../../../lib/db/prisma";
 import { z } from "zod";
 
-// Fix 3.3: Proper Zod schemas for node and edge payloads instead of z.array(z.any())
+// Proper Zod schemas for node and edge payloads instead of z.array(z.any())
 const NodeSchema = z.object({
   id: z.string(),
   type: z.string(),
@@ -25,7 +25,7 @@ const createWorkflowSchema = z.object({
   edges: z.array(EdgeSchema),
 });
 
-// Fix 3.1: GET /api/workflows — list all workflows for the authenticated user
+// GET /api/workflows — list all workflows for the authenticated user
 export async function GET(req: Request) {
   try {
     const { userId } = await auth();

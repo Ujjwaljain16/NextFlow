@@ -12,7 +12,7 @@ import {
 } from "./node-utils";
 import { useNodeDefinition } from "./node-definition-context";
 
-// ── NodeShell — card + floating title + handles ───────────────────────────────
+
 interface NodeShellProps {
   data: WorkflowNodeData;
   selected: boolean;
@@ -32,7 +32,7 @@ function NodeShell({ data, selected, children }: Omit<NodeShellProps, "connected
 
   return (
     <div className="relative">
-      {/* Floating title */}
+
       <div className="absolute -top-7 left-0 flex items-center gap-1.5 px-1 pb-1">
         <div className="flex size-3.5 items-center justify-center rounded-sm bg-[#111] border border-[#333]">
           <div className="size-1.5 rounded-full bg-[#fcc800]" />
@@ -40,7 +40,7 @@ function NodeShell({ data, selected, children }: Omit<NodeShellProps, "connected
         <span className="text-[12px] font-medium text-[#A0A0A0] tracking-wide truncate">{definition.name}</span>
       </div>
 
-      {/* Card */}
+
       <div className={cn(
         "relative w-64 rounded-[14px] bg-[#1A1A1A] transition-all duration-300",
         "border-[0.5px] border-white/[0.07] shadow-[0_8px_32px_rgba(0,0,0,0.5)]",
@@ -48,7 +48,7 @@ function NodeShell({ data, selected, children }: Omit<NodeShellProps, "connected
           ? "outline outline-[1.6px] outline-white/25 ring-[5px] ring-white/[0.04]"
           : STATUS_OUTLINE_CLASS_MAP[data.status] || ""
       )}>
-        {/* Header: Input / Output row */}
+
         <div className="relative flex h-8 items-center justify-between px-5 pt-5">
           <div className="flex items-center gap-2 relative">
             {definition.inputs?.map((input) => (
@@ -82,14 +82,14 @@ function NodeShell({ data, selected, children }: Omit<NodeShellProps, "connected
           </div>
         </div>
 
-        {/* Body */}
+
         <div className="px-4 pb-4 pt-2">{children}</div>
       </div>
     </div>
   );
 }
 
-// ── Upload helper ─────────────────────────────────────────────────────────────
+
 async function uploadFile(file: File): Promise<string> {
   const form = new FormData();
   form.append("file", file);
@@ -99,7 +99,7 @@ async function uploadFile(file: File): Promise<string> {
   return url as string;
 }
 
-// ── Collapsible Settings Layout ──────────────────────────────────────────────
+
 interface CollapsibleSettingsProps {
   children: React.ReactNode;
   defaultOpen?: boolean;
@@ -150,7 +150,7 @@ function CollapsibleSettings({ children, defaultOpen = false }: CollapsibleSetti
   );
 }
 
-// ── Text Node ────────────────────────────────────────────────────────────────
+
 export const TextNodeComponent = memo(function TextNode({ id, data, selected }: NodeProps<WorkflowNodeData>) {
   const updateNode = useWorkflowStore((s) => s.updateNode);
 
@@ -177,7 +177,7 @@ export const TextNodeComponent = memo(function TextNode({ id, data, selected }: 
   );
 });
 
-// ── Upload Image Node ─────────────────────────────────────────────────────────
+
 export const UploadImageNodeComponent = memo(function UploadImageNode({ id, data, selected }: NodeProps<WorkflowNodeData>) {
   const updateNode = useWorkflowStore((s) => s.updateNode);
 
@@ -249,7 +249,7 @@ export const UploadImageNodeComponent = memo(function UploadImageNode({ id, data
   );
 });
 
-// ── Upload Video Node ─────────────────────────────────────────────────────────
+
 export const UploadVideoNodeComponent = memo(function UploadVideoNode({ id, data, selected }: NodeProps<WorkflowNodeData>) {
   const updateNode = useWorkflowStore((s) => s.updateNode);
 
@@ -320,7 +320,7 @@ export const UploadVideoNodeComponent = memo(function UploadVideoNode({ id, data
   );
 });
 
-// ── LLM Node ─────────────────────────────────────────────────────────────────
+
 const LLM_MODELS = [
   "gemini-2.5-flash",
   "gemini-3.1-pro",
@@ -343,7 +343,7 @@ export const LLMNodeComponent = memo(function LLMNode({ id, data, selected }: No
     <NodeErrorBoundary nodeId={id}>
       <NodeShell data={data} selected={selected}>
         <CollapsibleSettings defaultOpen={true}>
-          {/* Model selector */}
+
           <div className="flex flex-col gap-1">
             <span className="text-[10px] font-medium text-zinc-600 uppercase tracking-widest">Model</span>
             <select
@@ -361,7 +361,7 @@ export const LLMNodeComponent = memo(function LLMNode({ id, data, selected }: No
             </select>
           </div>
 
-          {/* Connected input indicators */}
+
           <div className="flex flex-col gap-0.5">
             {useNodeDefinition(data.definitionId)?.inputs.map((inp) => {
               const isConnected = connectedInputIds.has(inp.id);
@@ -379,7 +379,7 @@ export const LLMNodeComponent = memo(function LLMNode({ id, data, selected }: No
           </div>
         </CollapsibleSettings>
 
-        {/* Output result display */}
+
         {(lastOutput || lastError) && (
           <div className={cn(
             "mt-3 rounded-md px-2 py-2 text-[11.5px] leading-relaxed max-h-48 overflow-y-auto scrollbar-none",
@@ -395,7 +395,7 @@ export const LLMNodeComponent = memo(function LLMNode({ id, data, selected }: No
   );
 });
 
-// ── Crop Image Node ────────────────────────────────────────────────────────────
+
 export const CropImageNodeComponent = memo(function CropImageNode({ id, data, selected }: NodeProps<WorkflowNodeData>) {
   const updateNode = useWorkflowStore((s) => s.updateNode);
   const edges = useEdges();
@@ -438,7 +438,7 @@ export const CropImageNodeComponent = memo(function CropImageNode({ id, data, se
           </div>
         </CollapsibleSettings>
 
-        {/* Output preview if available */}
+
         {Boolean(data.lastOutput) && typeof data.lastOutput === "object" && "output" in (data.lastOutput as Record<string, unknown>) && (
           <div className="mt-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -450,7 +450,7 @@ export const CropImageNodeComponent = memo(function CropImageNode({ id, data, se
   );
 });
 
-// ── Extract Frame Node ────────────────────────────────────────────────────────
+
 export const ExtractFrameNodeComponent = memo(function ExtractFrameNode({ id, data, selected }: NodeProps<WorkflowNodeData>) {
   const updateNode = useWorkflowStore((s) => s.updateNode);
   const edges = useEdges();

@@ -37,7 +37,7 @@ export const CustomEdge = memo(function CustomEdge({
   const isCutMode = canvasMode === "cut";
   const isActive = selected || isCutMode;
 
-  // Extract stroke color from style to compute glow
+
   const strokeColor = (style?.stroke as string) ?? "rgb(255,200,0)";
 
   return (
@@ -53,7 +53,7 @@ export const CustomEdge = memo(function CustomEdge({
         pointerEvents="none"
       />
 
-      {/* Main edge */}
+
       <BaseEdge
         id={id}
         path={edgePath}
@@ -77,7 +77,7 @@ export const CustomEdge = memo(function CustomEdge({
         className="react-flow__edge-interaction"
       />
 
-      {/* Midpoint delete dot — shown on selected or cut mode */}
+
       <EdgeLabelRenderer>
         {isActive && (
           <div

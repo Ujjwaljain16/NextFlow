@@ -20,7 +20,7 @@ export class ResolverService {
     graph: ExecutionGraph
   ): Promise<Record<string, unknown>> {
     
-    // 6. CONTEXT AWARENESS (Early lookup to avoid re-fetching)
+
     const targetNodeMetadata = graph.nodes[targetNodeId];
     if (!targetNodeMetadata) {
       throw new Error(`Graph Violation: Target node ${targetNodeId} not found in execution graph payload.`);
@@ -29,7 +29,7 @@ export class ResolverService {
 
     const parentNodeIds = graph.reverseAdjacencyList[targetNodeId] || [];
 
-    // 4. EXPLICIT HANDLING OF PARTIAL FAILURE (Divergence & Failure Check)
+
     const parentRuns = await prisma.nodeRun.findMany({
       where: {
         workflowRunId,
@@ -54,13 +54,13 @@ export class ResolverService {
 
     const rawInputs: Record<string, unknown> = {};
     
-    // 1. DETERMINISTIC ORDERING OF INPUTS
+
     // Sort incoming edges deterministically by source node ID to guarantee identical array ordering across runs
     const incomingEdges = graph.edges
       .filter((e) => e.target === targetNodeId)
       .sort((a, b) => a.source.localeCompare(b.source));
 
-    // 3. SCHEMA-DRIVEN AGGREGATION & 5. EDGE VALIDATION
+
     for (const edge of incomingEdges) {
       const inputHandleDef = nodeDefinition.inputs.find(i => i.id === edge.targetHandle);
       if (!inputHandleDef) {
@@ -72,7 +72,7 @@ export class ResolverService {
 
       const mappedValue = parentOutput[edge.sourceHandle];
       
-      // 2. HANDLE MISSING OUTPUTS EXPLICITLY
+
       if (mappedValue === undefined || mappedValue === null) {
         throw new Error(`Missing Data: Upstream node ${edge.source} succeeded but returned null/undefined for handle '${edge.sourceHandle}'.`);
       }

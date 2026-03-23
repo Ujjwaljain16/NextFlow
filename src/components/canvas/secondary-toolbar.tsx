@@ -64,7 +64,7 @@ export function SecondaryToolbar({ definitions }: SecondaryToolbarProps) {
 
   return (
     <div className="flex flex-row items-center gap-2 pointer-events-auto">
-      {/* Undo Button */}
+
       <TooltipWrapper label="Undo" shortcuts={["⌘", "Z"]}>
         <button
           type="button"
@@ -79,7 +79,7 @@ export function SecondaryToolbar({ definitions }: SecondaryToolbarProps) {
         </button>
       </TooltipWrapper>
 
-      {/* Redo Button */}
+
       <TooltipWrapper label="Redo" shortcuts={["⌘", "⇧", "Z"]}>
         <button
           type="button"
@@ -94,7 +94,7 @@ export function SecondaryToolbar({ definitions }: SecondaryToolbarProps) {
         </button>
       </TooltipWrapper>
 
-      {/* Sample Button */}
+
       <TooltipWrapper label="Sample Template">
         <button
           type="button"
@@ -111,7 +111,7 @@ export function SecondaryToolbar({ definitions }: SecondaryToolbarProps) {
         </button>
       </TooltipWrapper>
 
-      {/* History Toggle Button */}
+
       <TooltipWrapper label="Toggle History">
         <button
           type="button"

@@ -42,7 +42,7 @@ function BaseNode({ data, selected, onConfigChange }: BaseNodeProps) {
         </span>
       </div>
 
-      {/* Node card */}
+
       <div
         className={cn(
           "relative w-64 rounded-[14px] bg-[#1A1A1A] transition-all duration-300 ease-out",
@@ -52,10 +52,10 @@ function BaseNode({ data, selected, onConfigChange }: BaseNodeProps) {
             : STATUS_OUTLINE_CLASS_MAP[data.status] || ""
         )}
       >
-        {/* ── Header row: Input / Output labels + handles ── */}
+
         <div className="relative flex h-8 items-center justify-between px-5 pt-5">
 
-          {/* Left: Input handles + label */}
+
           <div className="flex items-center gap-2 relative">
             {definition.inputs?.map((input) => (
               <Handle
@@ -76,7 +76,7 @@ function BaseNode({ data, selected, onConfigChange }: BaseNodeProps) {
             )}
           </div>
 
-          {/* Right: Output label + handles */}
+
           <div className="flex items-center gap-2 relative">
             {(definition.outputs?.length ?? 0) > 0 && (
               <span className="text-[11px] font-normal text-zinc-500 select-none">Output</span>
@@ -98,7 +98,7 @@ function BaseNode({ data, selected, onConfigChange }: BaseNodeProps) {
           </div>
         </div>
 
-        {/* ── Action row ── */}
+
         <div className="flex justify-between items-center px-5 pt-4 pb-1.5">
           <div className="flex size-5 items-center justify-center rounded-[4px] text-zinc-600 hover:text-zinc-400 transition-colors cursor-pointer">
             <Edit2 className="size-[11px]" />
@@ -111,7 +111,7 @@ function BaseNode({ data, selected, onConfigChange }: BaseNodeProps) {
           </button>
         </div>
 
-        {/* ── Content area ── */}
+
         <div className="px-5 pb-5 flex flex-col gap-3">
           {definition.configFields?.map((field) => {
             if (field.fieldType === "string") {

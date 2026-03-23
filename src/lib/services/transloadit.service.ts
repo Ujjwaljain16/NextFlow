@@ -26,12 +26,12 @@ export class TransloaditService {
       uploads: {
         [fileName]: fileBuffer
       },
-      // FIX: No steps needed for a simple upload-and-get-URL. 
+      // No steps needed for a simple upload-and-get-URL. 
       // This avoids ASSEMBLY_STEP_UNKNOWN_ROBOT errors caused by invalid robots like /file/store.
       params: {
         auth: { key: authKey },
         steps: {
-          // FIX: Transloadit requires at least one step. /file/filter is a safe no-op for any file type.
+          // Transloadit requires at least one step. /file/filter is a safe no-op for any file type.
           store: {
             robot: "/file/filter",
             use: ":original"
@@ -44,7 +44,7 @@ export class TransloaditService {
     try {
       const result = await client.createAssembly(options);
 
-      // FIX: Since we're not using a 'store' step anymore, prioritize the arrivals/uploads array
+      // Since we're not using a 'store' step anymore, prioritize the arrivals/uploads array
       const uploadedUrl =
         result?.uploads?.[0]?.ssl_url ||
         result?.results?.[":original"]?.[0]?.ssl_url ||

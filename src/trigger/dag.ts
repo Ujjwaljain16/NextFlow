@@ -38,7 +38,7 @@ async function runNode(payload: { workflowRunId: string; nodeId: string }, isDel
   const graph = runRecord.executionGraph as unknown as ExecutionGraph;
   const targetNodeMetadata = graph.nodes[nodeId];
 
-  // SKIP DISABLED NODES
+
   if (targetNodeMetadata.data?.disabled) {
     logger.info(`[runNode] Skipping node ${nodeId} as it is marked as disabled.`);
     
@@ -77,7 +77,7 @@ async function runNode(payload: { workflowRunId: string; nodeId: string }, isDel
     data: {
       status: 'RUNNING',
       startedAt: new Date(),
-      inputs: resolvedInputs as unknown as Prisma.InputJsonValue, // Prisma Json compatibility
+      inputs: resolvedInputs as unknown as Prisma.InputJsonValue,
       error: null,
     }
   });
@@ -87,7 +87,7 @@ async function runNode(payload: { workflowRunId: string; nodeId: string }, isDel
     return { success: true, note: "Skipped duplicate execution request" };
   }
 
-  // 2. CONCURRENCY DELEGATION
+
   if (isLlmNode && !isDelegatedTask) {
     logger.info(`[runNode] Delegating LLM Node ${nodeId} to sequential queue.`);
     await executeLlmNodeTask.trigger(payload);
@@ -100,7 +100,7 @@ async function runNode(payload: { workflowRunId: string; nodeId: string }, isDel
 
     const rawOutputs = await nodeDefinition.execute(resolvedInputs, config, { workflowRunId, nodeId });
 
-    // FIX 3.6: Validate outputs against the node's outputSchema to enforce the contract.
+    // Validate outputs against the node's outputSchema to enforce the contract.
     const outputs = nodeDefinition.outputSchema.parse(rawOutputs ?? {});
 
     await prisma.nodeRun.update({
@@ -112,7 +112,7 @@ async function runNode(payload: { workflowRunId: string; nodeId: string }, isDel
       },
     });
 
-    // 2. ONLY TRIGGER ORCHESTRATOR ON DEFINITIVE SUCCESS
+
     await orchestratorTask.trigger({
       workflowRunId,
       completedNodeId: nodeId,
@@ -121,7 +121,7 @@ async function runNode(payload: { workflowRunId: string; nodeId: string }, isDel
     return { success: true, outputs };
 
   } catch (error: unknown) {
-    // 3. SEPARATE TRANSIENT VS TERMINAL ERRORS
+    // SEPARATE TRANSIENT VS TERMINAL ERRORS
     const category = GlobalErrorHandler.categorize(error);
     const message = error instanceof Error ? error.message : String(error);
 
@@ -139,7 +139,7 @@ async function runNode(payload: { workflowRunId: string; nodeId: string }, isDel
     }
 
     logger.error(`[runNode] Terminal failure for node ${nodeId}`, { error: message });
-    // Terminal failure
+
     await prisma.nodeRun.update({
       where: { workflowRunId_nodeId: { workflowRunId, nodeId } },
       data: {

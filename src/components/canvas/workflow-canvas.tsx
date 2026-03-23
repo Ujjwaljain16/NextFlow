@@ -41,12 +41,10 @@ export function WorkflowCanvas({ definitions }: WorkflowCanvasProps) {
   const lastClickTime = useRef<number>(0);
   const mousePos = useRef({ x: 0, y: 0 });
 
-  // Register global canvas keyboard listeners
   useKeyboardShortcuts({
-    onAddNode: () => {
-      // Open picker at current mouse position
-      setPickerPos({ x: mousePos.current.x, y: mousePos.current.y });
-    }
+      onAddNode: () => {
+        setPickerPos({ x: mousePos.current.x, y: mousePos.current.y });
+      }
   });
 
   const { nodes, edges, onNodesChange, onEdgesChange, connectNodes, setSelectedNode, removeNode, addNode, canvasMode } = useWorkflowStore(
@@ -99,8 +97,7 @@ export function WorkflowCanvas({ definitions }: WorkflowCanvasProps) {
 
       if (sourceHandle.type === targetHandle.type) {
         // ── DAG cycle check ──────────────────────────────────────────────────
-        // Would adding source→target create a path from target back to source?
-        // DFS from target along existing edges; if we reach source → cycle → reject.
+        // DFS from target along existing edges to prevent cycles
         const buildAdj = () => {
           const adj: Record<string, string[]> = {};
           for (const n of nodes) adj[n.id] = [];
@@ -289,7 +286,7 @@ export function WorkflowCanvas({ definitions }: WorkflowCanvasProps) {
       </CanvasErrorBoundary>
     </NodeDefinitionProvider>
 
-      {/* Context Menu */}
+
       {contextMenu && (
         <NodeContextMenu
           x={contextMenu.x}
@@ -299,7 +296,7 @@ export function WorkflowCanvas({ definitions }: WorkflowCanvasProps) {
         />
       )}
 
-      {/* Node Picker Menu */}
+
       {pickerPos && (
         <NodePicker
           x={pickerPos.x}
@@ -310,10 +307,10 @@ export function WorkflowCanvas({ definitions }: WorkflowCanvasProps) {
         />
       )}
 
-      {/* Empty state message */}
+
       {nodes.length === 0 && <CanvasEmptyState />}
 
-      {/* Main toolbar (bottom center) */}
+
       <CanvasToolbar />
     </div>
   );

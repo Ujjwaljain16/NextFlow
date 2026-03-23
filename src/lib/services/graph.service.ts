@@ -41,7 +41,7 @@ export class GraphService {
     const reverseAdjacencyList: Record<string, string[]> = {};
 
     nodes.forEach((n) => {
-      // 1. Validate node structurally exists within local code system
+
       try {
          Registry.get(n.type);
       } catch {
@@ -61,7 +61,7 @@ export class GraphService {
       if (!graphNodes[e.source]) throw new GraphValidationError(`Edge references missing source node: ${e.source}`);
       if (!graphNodes[e.target]) throw new GraphValidationError(`Edge references missing target node: ${e.target}`);
 
-      // 2. Validate Edge Ports strictly
+
       const sourceDef = Registry.get(graphNodes[e.source].type);
       const targetDef = Registry.get(graphNodes[e.target].type);
 
@@ -107,7 +107,7 @@ export class GraphService {
     const recursionStack = new Set<string>();
 
     const detectCyclicalCollision = (nodeId: string): boolean => {
-      // If we attempt to evaluate a node we are currently executing recursively
+
       if (recursionStack.has(nodeId)) return true; 
       if (visited.has(nodeId)) return false;
 
@@ -128,7 +128,7 @@ export class GraphService {
       }
     }
 
-    // 5. Hard boundary checks for non-entry sequences
+
     const entryNodes = Object.keys(graphNodes).filter((id) => reverseAdjacencyList[id].length === 0);
     if (entryNodes.length === 0 && Object.keys(graphNodes).length > 0) {
       throw new GraphValidationError(`No entry nodes identified. Circular logic isolated without defined entry bounds.`);

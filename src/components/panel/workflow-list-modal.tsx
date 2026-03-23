@@ -45,7 +45,7 @@ export function WorkflowListModal({ isOpen, onClose, onSelect }: WorkflowListMod
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
       <div className="w-full max-w-md bg-[#1A1A1B] border border-white/10 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh]">
-        {/* Header */}
+
         <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-[#141415]">
           <h2 className="text-sm font-semibold text-zinc-200 uppercase tracking-widest">Load Workflow</h2>
           <button 
@@ -56,7 +56,7 @@ export function WorkflowListModal({ isOpen, onClose, onSelect }: WorkflowListMod
           </button>
         </div>
 
-        {/* Content */}
+
         <div className="p-4 overflow-y-auto flex-1 scrollbar-thin scrollbar-thumb-zinc-700">
           {loading && (
             <div className="py-8 flex justify-center">

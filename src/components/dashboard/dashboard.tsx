@@ -71,7 +71,7 @@ export function Dashboard({
       <DashboardSidebar />
 
       <main className="flex-1 flex flex-col overflow-y-auto">
-        {/* Hero Banner */}
+
         <div className="relative w-full aspect-[21/9] min-h-[320px] max-h-[420px] flex flex-col justify-end p-8 @lg:p-14 overflow-hidden">
            <div className="absolute inset-0 z-0">
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent z-10" />
@@ -109,9 +109,9 @@ export function Dashboard({
            </div>
         </div>
 
-        {/* content Area */}
+
         <div className="px-8 @lg:px-14 py-12 flex-1">
-           {/* secondary Nav */}
+
            <div className="flex flex-wrap items-center justify-between gap-6 border-b border-white/5 pb-4 mb-8">
               <div className="flex gap-2">
                  {["projects", "apps", "examples", "templates"].map((tab) => (
@@ -153,9 +153,9 @@ export function Dashboard({
               </div>
            </div>
 
-           {/* Workflow Grid */}
+
            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8">
-              {/* New Workflow Card */}
+
               <button 
                 onClick={onNewWorkflowAction}
                 className="group flex flex-col gap-3 text-left w-full"
@@ -171,7 +171,7 @@ export function Dashboard({
                  </div>
               </button>
 
-              {/* Workflow Cards */}
+
               {isLoading ? (
                  Array.from({ length: 4 }).map((_, i) => (
                     <div key={i} className="flex flex-col gap-3 animate-pulse">
@@ -245,7 +245,7 @@ function WorkflowCard({
           </div>
        </div>
 
-       {/* Management Menu Trigger */}
+
        <div className="absolute top-2 right-2 z-30 opacity-0 group-hover:opacity-100 transition-opacity">
           <button 
             onClick={(e) => {
@@ -348,7 +348,7 @@ function WorkflowMiniMap({ nodes, edges }: {
         className="w-full h-full overflow-visible"
         preserveAspectRatio="xMidYMid meet"
       >
-        {/* Edges */}
+
         {edges?.map((edge, i) => {
           const source = nodes.find(n => n.id === edge.source);
           const target = nodes.find(n => n.id === edge.target);
@@ -371,7 +371,7 @@ function WorkflowMiniMap({ nodes, edges }: {
           );
         })}
         
-        {/* Nodes */}
+
         {nodes.map((node) => (
           <rect
             key={node.id}

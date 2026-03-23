@@ -4,7 +4,7 @@ import { prisma } from "../../../../../lib/db/prisma";
 
 type RouteProps = { params: Promise<{ id: string }> };
 
-// GET /api/workflows/[id]/export — export workflow as JSON (Fix 3.2)
+// GET /api/workflows/[id]/export — export workflow as JSON
 export async function GET(req: Request, props: RouteProps) {
   try {
     const { userId } = await auth();

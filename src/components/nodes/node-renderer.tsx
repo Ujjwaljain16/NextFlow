@@ -13,7 +13,7 @@ import {
   ExtractFrameNodeComponent,
 } from "./specialized-nodes";
 
-// Map definition ID → specialized renderer
+
 const SPECIALIZED: Record<string, React.ComponentType<NodeProps<WorkflowNodeData>>> = {
   "core.text": TextNodeComponent,
   "core.upload_image": UploadImageNodeComponent,

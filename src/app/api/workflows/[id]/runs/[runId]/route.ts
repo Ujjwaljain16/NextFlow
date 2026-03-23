@@ -12,7 +12,6 @@ export async function GET(req: Request, props: RouteProps) {
 
     const { id, runId } = await props.params;
 
-    // Verify user ownership through the workflow relation
     const run = await prisma.workflowRun.findUnique({
       where: { id: runId },
       include: {

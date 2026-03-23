@@ -29,17 +29,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "INVALID_FILE" }, { status: 400 });
     }
 
-    // Validate file size
     if (file.size > MAX_FILE_SIZE) {
       return NextResponse.json({ error: "FILE_TOO_LARGE", maxSizeMB: 100 }, { status: 400 });
     }
 
-    // Validate MIME type
     if (!ALLOWED_MIME_TYPES.has(file.type)) {
       return NextResponse.json({ error: "INVALID_FILE_TYPE", received: file.type }, { status: 400 });
     }
 
-    // Validate extension
     const ext = "." + (file.name.split(".").pop()?.toLowerCase() ?? "");
     if (!ALLOWED_EXTENSIONS.has(ext)) {
       return NextResponse.json({ error: "INVALID_FILE_EXTENSION", received: ext }, { status: 400 });

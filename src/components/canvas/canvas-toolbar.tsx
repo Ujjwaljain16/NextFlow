@@ -19,7 +19,7 @@ export function CanvasToolbar() {
     <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 pointer-events-auto">
       <div className="flex flex-row items-center gap-1 rounded-xl border-[0.5px] border-white/10 p-1 shadow-md bg-[#1A1A1B]/90 backdrop-blur-xl">
 
-        {/* Add Node Action */}
+
         <TooltipWrapper label="New Node" shortcuts={["N"]}>
           <ToolbarButton
             icon={
@@ -33,7 +33,7 @@ export function CanvasToolbar() {
           />
         </TooltipWrapper>
 
-        {/* Select Mode */}
+
         <TooltipWrapper label="Select Mode">
           <ToolbarButton
             icon={
@@ -47,7 +47,7 @@ export function CanvasToolbar() {
           />
         </TooltipWrapper>
 
-        {/* Pan Mode */}
+
         <TooltipWrapper label="Pan Mode">
           <ToolbarButton
             icon={
@@ -64,7 +64,7 @@ export function CanvasToolbar() {
           />
         </TooltipWrapper>
 
-        {/* Cut Mode */}
+
         <TooltipWrapper label="Cut Mode">
           <ToolbarButton
             icon={
@@ -82,7 +82,7 @@ export function CanvasToolbar() {
           />
         </TooltipWrapper>
 
-        {/* Presets Action */}
+
         <TooltipWrapper label="Presets">
           <ToolbarButton
             icon={
@@ -106,7 +106,7 @@ function ToolbarButton({ icon, onClick, active = false }: ToolbarButtonProps) {
     <button
       type="button"
       onClick={onClick}
-      // title={label} - We remove native title so it doesn't overlap the custom tooltip
+      // native title removed to prevent overlap with custom tooltip
       className={cn(
         "flex h-11 w-11 items-center justify-center rounded-lg p-1 transition-[transform,background-color] duration-75 ease-out active:scale-[0.96] cursor-pointer",
         active

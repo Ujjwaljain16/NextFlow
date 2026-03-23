@@ -24,7 +24,7 @@ export function DashboardSidebar() {
       "flex h-screen flex-col border-r border-[#1A1A1A] bg-[#000000] font-sans select-none transition-all duration-300",
       isCollapsed ? "w-[60px]" : "w-64"
     )}>
-      {/* Brand & Collapse Toggle */}
+
       <div className={cn("flex flex-col border-b border-[#1A1A1A] shrink-0", isCollapsed ? "py-[14px]" : "p-4 gap-4")}>
         <div className="flex w-full items-center gap-3 px-[2px]">
           <button 
@@ -47,7 +47,7 @@ export function DashboardSidebar() {
         </div>
       </div>
 
-      {/* Main Nav */}
+
       <nav className="space-y-1 p-2 mt-4">
         {!isCollapsed && (
           <div className="px-2 mb-2">
@@ -62,10 +62,10 @@ export function DashboardSidebar() {
 
       <div className="my-4 border-t border-[#1A1A1A]" />
 
-      {/* Sessions / Workflows */}
+
       <div className="flex-1 overflow-y-auto p-2" />
 
-      {/* Footer / User */}
+
       <div className="mt-auto border-t border-[#1A1A1A] p-2 shrink-0">
         <SidebarUserButton collapsed={isCollapsed} />
       </div>
@@ -81,7 +81,7 @@ function SidebarUserButton({ collapsed }: { collapsed: boolean }) {
 
   return (
     <div className="relative">
-      {/* Dropdown Menu */}
+
       {isOpen && (
         <div 
           className="absolute bottom-full left-0 mb-2 w-56 rounded-lg border border-[#333333] bg-[#0A0A0A] p-1 shadow-2xl z-50 animate-in fade-in slide-in-from-bottom-2"

@@ -23,7 +23,6 @@ export async function POST(
 
     const { id } = await props.params;
 
-    // Parse optional body for partial execution
     const body = await req.json().catch(() => ({}));
     const { selectedNodeIds, isolated } = RunWorkflowSchema.parse(body);
 
@@ -38,7 +37,6 @@ export async function POST(
     const nodes = (workflow.nodes || []) as Array<{ id: string; type: string; data?: Record<string, unknown> }>;
     const edges = (workflow.edges || []) as Array<{ source: string; target: string; sourceHandle: string; targetHandle: string }>;
 
-    // 1. Math Evaluation
     const graphService = new GraphService();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const fullGraph = GraphService.buildExecutionGraph(nodes as any, edges as any);
@@ -48,7 +46,6 @@ export async function POST(
     let runScope: "full" | "partial" | "single";
 
     if (!selectedNodeIds || selectedNodeIds.length === 0) {
-      // Full workflow run
       executionGraph = fullGraph;
       const entryNodeIds = Object.keys(fullGraph.nodes).filter(
         (nid) => fullGraph.reverseAdjacencyList[nid].length === 0
@@ -70,19 +67,16 @@ export async function POST(
         return NextResponse.json({ error: "INVALID_SELECTION" }, { status: 400 });
       }
 
-      // Build a scoped execution graph containing only subgraph nodes + their connecting edges
       const subgraphNodeIds = new Set(subgraphNodes.map((n) => n.id));
       const subgraphEdges = fullGraph.edges.filter(
         (e) => subgraphNodeIds.has(e.source) && subgraphNodeIds.has(e.target)
       );
 
-      // Create a map for nodes in the execution graph format
       const graphNodesMap: Record<string, { type: string; data: Record<string, unknown> }> = {};
       subgraphNodes.forEach(n => {
         graphNodesMap[n.id] = { type: n.type, data: n.data || {} };
       });
 
-      // Recalculate adjacency lists for the subgraph
       const adjacencyList: Record<string, string[]> = {};
       const reverseAdjacencyList: Record<string, string[]> = {};
       
@@ -107,7 +101,7 @@ export async function POST(
       return NextResponse.json({ error: "NO_ENTRY_NODES" }, { status: 400 });
     }
 
-    // 2. Exact Transaction Boundary
+    // 2. Transaction Boundary
     const runRecord = await prisma.$transaction(async (tx) => {
       const run = await tx.workflowRun.create({
         data: {

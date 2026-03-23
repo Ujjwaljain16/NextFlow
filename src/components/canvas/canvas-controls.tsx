@@ -46,7 +46,7 @@ export function CanvasControls() {
   return (
     <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 pointer-events-auto">
       <div className="flex items-center gap-2 rounded-xl bg-zinc-900/95 border border-zinc-800/50 px-3 py-2 backdrop-blur-sm shadow-lg">
-        {/* Zoom Out */}
+
         <ControlButton
           icon={
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -57,7 +57,7 @@ export function CanvasControls() {
           onClick={handleZoomOut}
         />
 
-        {/* Fit View */}
+
         <div className="w-px h-6 bg-zinc-700/30" />
         <ControlButton
           icon={
@@ -74,7 +74,7 @@ export function CanvasControls() {
           onClick={handleFitView}
         />
 
-        {/* Zoom In */}
+
         <div className="w-px h-6 bg-zinc-700/30" />
         <ControlButton
           icon={

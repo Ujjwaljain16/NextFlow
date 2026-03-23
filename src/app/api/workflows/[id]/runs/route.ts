@@ -15,7 +15,6 @@ export async function GET(req: Request, props: RouteProps) {
     const limit = Math.min(parseInt(searchParams.get("limit") ?? "20"), 100);
     const cursor = searchParams.get("cursor") ?? undefined;
 
-    // Verify the user owns this workflow
     const workflow = await prisma.workflow.findUnique({
       where: { id, userId },
       select: { id: true },

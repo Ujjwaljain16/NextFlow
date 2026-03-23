@@ -215,7 +215,7 @@ export function WorkflowTopBar({ onBackAction }: { onBackAction?: () => void }) 
         onSelect={handleLoad}
       />
 
-      {/* Hidden file input for import */}
+
       <input
         ref={importInputRef}
         type="file"
@@ -227,7 +227,7 @@ export function WorkflowTopBar({ onBackAction }: { onBackAction?: () => void }) 
         }}
       />
 
-      {/* Left: Title Pill & Menu */}
+
       <div className="pointer-events-auto relative">
         <div className="bg-[#1A1A1B] border border-white/5 flex items-center rounded-xl py-1.5 pr-2.5 pl-1.5 shadow-xl">
           <button
@@ -258,13 +258,13 @@ export function WorkflowTopBar({ onBackAction }: { onBackAction?: () => void }) 
           </div>
         </div>
 
-        {/* Dropdown Menu */}
+
         {isMenuOpen && (
           <>
             <div className="fixed inset-0 z-40" onClick={() => setIsMenuOpen(false)} />
             <div className="absolute top-[calc(100%+8px)] left-0 w-[220px] z-50 bg-[#1A1A1B] border border-[#333333] rounded-xl shadow-2xl flex flex-col gap-1 px-2 py-3 cursor-default">
 
-              {/* Back */}
+
               <button
                 type="button"
                 className="hover:bg-[#2A2A2B] flex items-center w-full gap-2 rounded-md px-2 py-2.5 text-[13px] transition-colors duration-100 ease-out text-[#E0E0E0]"
@@ -280,7 +280,7 @@ export function WorkflowTopBar({ onBackAction }: { onBackAction?: () => void }) 
                 <span className="font-medium">Back to Sessions</span>
               </button>
 
-              {/* Load Workflow */}
+
               <button
                 type="button"
                 className="hover:bg-[#2A2A2B] disabled:opacity-40 flex items-center w-full gap-2 rounded-md px-2 py-2.5 text-[13px] transition-colors duration-100 ease-out text-[#E0E0E0]"
@@ -296,7 +296,7 @@ export function WorkflowTopBar({ onBackAction }: { onBackAction?: () => void }) 
                 <span className="font-medium">Load Workflow</span>
               </button>
 
-              {/* Save Workflow */}
+
               <button
                 type="button"
                 className="hover:bg-[#2A2A2B] disabled:opacity-40 flex items-center w-full gap-2 rounded-md px-2 py-2.5 text-[13px] transition-colors duration-100 ease-out text-[#E0E0E0]"
@@ -311,7 +311,7 @@ export function WorkflowTopBar({ onBackAction }: { onBackAction?: () => void }) 
                 <span className="font-medium">Save Workflow</span>
               </button>
 
-              {/* Import */}
+
               <button
                 type="button"
                 className="hover:bg-[#2A2A2B] disabled:opacity-40 flex items-center w-full gap-2 rounded-md px-2 py-2.5 text-[13px] transition-colors duration-100 ease-out text-[#E0E0E0]"
@@ -326,7 +326,7 @@ export function WorkflowTopBar({ onBackAction }: { onBackAction?: () => void }) 
                 <span className="font-medium">Import JSON</span>
               </button>
 
-              {/* Export */}
+
               <button
                 type="button"
                 className="hover:bg-[#2A2A2B] disabled:opacity-40 flex items-center w-full gap-2 rounded-md px-2 py-2.5 text-[13px] transition-colors duration-100 ease-out text-[#E0E0E0]"
@@ -343,7 +343,7 @@ export function WorkflowTopBar({ onBackAction }: { onBackAction?: () => void }) 
 
               <div className="w-full h-px bg-[#333333] my-1" />
 
-              {/* Run Workflow */}
+
               <button
                 type="button"
                 className="hover:bg-[#2A2A2B] disabled:opacity-40 flex items-center w-full gap-2 rounded-md px-2 py-2.5 text-[13px] transition-colors duration-100 ease-out text-white bg-white/5 border border-white/10 mt-1"
@@ -363,7 +363,7 @@ export function WorkflowTopBar({ onBackAction }: { onBackAction?: () => void }) 
         )}
       </div>
 
-      {/* Right: Persistent Run + Save buttons */}
+
       <div className="pointer-events-auto flex items-center gap-2">
         <button
           type="button"

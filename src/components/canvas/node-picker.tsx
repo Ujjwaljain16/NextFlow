@@ -12,7 +12,7 @@ interface NodePickerProps {
   onClose: () => void;
 }
 
-// Icon mapper for categories using raw SVGs for consistency
+
 const CATEGORY_ICONS: Record<string, React.ReactNode> = {
   recent: (
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -54,7 +54,7 @@ export function NodePicker({ x, y, definitions, onSelect, onClose }: NodePickerP
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Group nodes by category
+
   const categories = useMemo(() => {
     const groups: Record<string, UINodeDefinition[]> = {
       image: [],
@@ -133,7 +133,7 @@ export function NodePicker({ x, y, definitions, onSelect, onClose }: NodePickerP
       className="fixed z-[1000] w-72 flex flex-col overflow-hidden rounded-xl border border-white/10 bg-[#1A1A1B]/95 backdrop-blur-xl shadow-2xl animate-in fade-in zoom-in duration-150 origin-top-left"
       style={{ left: x, top: y }}
     >
-      {/* Search Header */}
+
       <div className="relative flex items-center p-2 border-b border-white/5">
         <div className="absolute left-4 size-4 text-zinc-500 pointer-events-none">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -153,7 +153,7 @@ export function NodePicker({ x, y, definitions, onSelect, onClose }: NodePickerP
         />
       </div>
 
-      {/* List Content */}
+
       <div className="max-h-[380px] overflow-y-auto pt-1 pb-2 scrollbar-none">
         {categories.map((cat) => {
           const catNodes = cat.nodes.filter(n => 

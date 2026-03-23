@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "../../../../lib/db/prisma";
 import { z } from "zod";
 
-// Fix 3.2: POST /api/workflows/import — import a workflow from JSON
+// POST /api/workflows/import — import a workflow from JSON
 const importSchema = z.object({
   name: z.string().min(1).max(200),
   nodes: z.array(z.object({

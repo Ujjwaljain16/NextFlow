@@ -13,7 +13,7 @@ export class GlobalErrorHandler {
     
     const message = error instanceof Error ? error.message : String(error);
     
-    // 1. Terminal Errors (No retry possible)
+
     if (
       message.includes("Missing Data") || 
       message.includes("Cascading Failure") ||
@@ -29,7 +29,7 @@ export class GlobalErrorHandler {
       return ErrorCategory.TERMINAL;
     }
 
-    // 2. Transient Errors (Retryable)
+
     if (
       message.includes("429") || 
       message.includes("quota") || 

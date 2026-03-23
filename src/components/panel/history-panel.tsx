@@ -76,7 +76,7 @@ export function HistoryPanel() {
     }
   );
 
-  // Reset selected run when workflow changes or current run changes
+
   const [prevId, setPrevId] = useState({ workflowId, currentRunId });
   if (prevId.workflowId !== workflowId || prevId.currentRunId !== currentRunId) {
     setSelectedRun(null);

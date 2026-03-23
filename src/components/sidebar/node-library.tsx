@@ -11,14 +11,14 @@ interface NodeLibraryProps {
   definitions: UINodeDefinition[];
 }
 
-// Icon mapper for Nextflow nodes based on Krea aesthetics
+
 function getNodeIcon(id: string) {
   if (id.includes("text")) return <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h8m-8 6h16" /></svg>;
   if (id.includes("llm") || id.includes("ai")) return <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>;
   if (id.includes("image")) return <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>;
   if (id.includes("video")) return <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>;
 
-  // Generic box icon
+
   return <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>;
 }
 
@@ -54,7 +54,7 @@ export function NodeLibrary({ definitions }: NodeLibraryProps) {
       sidebarCollapsed ? "w-[60px]" : "w-56 shadow-2xl overflow-x-hidden"
     )}>
 
-      {/* Settings / Collapse Header & Search */}
+
       <div className={cn("flex flex-col border-b border-[#1A1A1A] shrink-0", sidebarCollapsed ? "py-[14px]" : "py-3 gap-3")}>
         <div className="flex w-full items-center gap-2 px-[10px]">
           <button 
@@ -77,7 +77,7 @@ export function NodeLibrary({ definitions }: NodeLibraryProps) {
           )}
         </div>
 
-        {/* Search Bar - hidden when collapsed */}
+
         {!sidebarCollapsed && (
           <div className="w-full px-[10px]">
             <input
@@ -90,13 +90,13 @@ export function NodeLibrary({ definitions }: NodeLibraryProps) {
         )}
       </div>
 
-      {/* Node List */}
+
       <div className={cn(
         "flex-1 scrollbar-thin scrollbar-thumb-[#333333] scrollbar-track-transparent",
         sidebarCollapsed ? "overflow-visible" : "overflow-y-auto overflow-x-hidden"
       )}>
         <div className="space-y-1 p-2">
-          {/* Quick Access section label */}
+
           {!sidebarCollapsed && (
             <div className="px-2 pb-1 pt-2">
               <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-600">
@@ -129,7 +129,7 @@ export function NodeLibrary({ definitions }: NodeLibraryProps) {
           )}
         </div>
       </div>
-      {/* User Profile / Logout Section */}
+
       <div className="mt-auto border-t border-[#1A1A1A] p-2 shrink-0">
         <SidebarUserButton collapsed={sidebarCollapsed} />
       </div>
@@ -149,7 +149,7 @@ function SidebarUserButton({ collapsed }: { collapsed: boolean }) {
 
   return (
     <div className="relative">
-      {/* Dropdown Menu (Simple implementation for now) */}
+
       {isOpen && (
         <div 
           className="absolute bottom-full left-0 mb-2 w-56 rounded-lg border border-[#333333] bg-[#0A0A0A] p-1 shadow-2xl z-50 animate-in fade-in slide-in-from-bottom-2"

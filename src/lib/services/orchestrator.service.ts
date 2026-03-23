@@ -26,7 +26,7 @@ export class OrchestratorService {
         continue;
       }
 
-      // 2. USE THE RIGHT INDEX
+
       // Leveraging @@index([workflowRunId, nodeId]) ensures this hot path executes efficiently.
       const dependencyRuns = await prisma.nodeRun.findMany({
         where: {
@@ -47,11 +47,11 @@ export class OrchestratorService {
         // The read is advisory. The INSERT dictates the single source of truth.
         await this.safelyQueueNode(workflowRunId, downstreamId);
       } else {
-        // 6. FAILURE PROPAGATION (Define it explicitly)
+
         // If an upstream dependency is FAILED, there is zero possibility of recovery. Propagate failure.
         const hasFailedDeps = dependencyRuns.some((run: { nodeId: string; status: string }) => run.status === "FAILED");
         if (hasFailedDeps) {
-          // Explicit UI hinting rule indicating this downstream node will never run.
+
           await this.markNodeFailedGracefully(workflowRunId, downstreamId, "Skipped due to upstream dependency failure.", graph);
         }
       }
@@ -67,7 +67,7 @@ export class OrchestratorService {
    */
   private static async safelyQueueNode(workflowRunId: string, nodeId: string): Promise<void> {
     try {
-      // FIX 2.2: Advisory check to reduce Prisma "Unique constraint failed" noise in logs.
+      // Advisory check to reduce Prisma "Unique constraint failed" noise in logs.
       // While the catch block below is the definitive safety net, checking first prevents
       // the terminal from being flooded with Prisma error stack traces during high concurrency.
       const existing = await prisma.nodeRun.findUnique({
@@ -154,7 +154,7 @@ export class OrchestratorService {
       throw error;
     }
 
-    // CRITICAL (Fix 2.1): Recursively propagate failure through this node's own downstream chain.
+    // Recursively propagate failure through this node's own downstream chain.
     await this.handleNodeCompletion(workflowRunId, nodeId, graph);
   }
 

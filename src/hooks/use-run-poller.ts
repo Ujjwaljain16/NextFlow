@@ -39,7 +39,7 @@ export const useRunPoller = () => {
           })),
         );
 
-        // Stop polling once the run reaches a terminal state
+
         if (TERMINAL_STATUSES.has(run.status)) {
           setCurrentRun(null); // Clear the run to stop polling
           return;
@@ -48,14 +48,14 @@ export const useRunPoller = () => {
         if (!cancelled && process.env.NODE_ENV === "development") {
           console.warn("[useRunPoller] Poll error:", error);
         }
-        // If the run is not found (404), stop polling
+
         if (error instanceof Error && (error.message.includes("404") || error.message.includes("NOT_FOUND"))) {
           setCurrentRun(null);
           return;
         }
       }
 
-      // Schedule next poll only if still active and not terminal
+
       if (!cancelled) {
         timeoutId = setTimeout(poll, POLL_INTERVAL);
       }

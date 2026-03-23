@@ -16,7 +16,7 @@ export function useKeyboardShortcuts({ onAddNode }: { onAddNode?: (e: KeyboardEv
         return;
       }
 
-      // Add Node: N
+
       if (e.key.toLowerCase() === "n" && !e.ctrlKey && !e.metaKey) {
         e.preventDefault();
         if (onAddNode) {
@@ -26,19 +26,19 @@ export function useKeyboardShortcuts({ onAddNode }: { onAddNode?: (e: KeyboardEv
         }
       }
 
-      // Fit View: F
+
       if (e.key.toLowerCase() === "f" && !e.ctrlKey && !e.metaKey) {
         e.preventDefault();
         reactFlowInstance.fitView({ duration: 800 });
       }
 
-      // Undo: Ctrl/Cmd + Z
+
       if (e.key.toLowerCase() === "z" && (e.ctrlKey || e.metaKey) && !e.shiftKey) {
         e.preventDefault();
         undo();
       }
 
-      // Redo: Ctrl/Cmd + Shift + Z or Ctrl/Cmd + Y
+
       if (
         (e.key.toLowerCase() === "z" && (e.ctrlKey || e.metaKey) && e.shiftKey) ||
         (e.key.toLowerCase() === "y" && (e.ctrlKey || e.metaKey))

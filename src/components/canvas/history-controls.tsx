@@ -44,7 +44,7 @@ export function HistoryControls() {
   return (
     <div className="absolute bottom-6 left-6 z-10 pointer-events-auto">
       <div className="flex items-center gap-1 rounded-xl bg-zinc-900/95 border border-zinc-800/50 px-1 py-1 backdrop-blur-sm shadow-lg">
-        {/* Undo */}
+
         <HistoryButton
           icon={
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -56,7 +56,7 @@ export function HistoryControls() {
           disabled={!canUndo}
         />
 
-        {/* Redo */}
+
         <HistoryButton
           icon={
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

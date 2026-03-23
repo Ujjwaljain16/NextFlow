@@ -12,7 +12,6 @@ export default async function Home() {
 
   return (
     <main className="relative h-screen w-full overflow-hidden bg-[#0A0A0A] text-zinc-100 antialiased font-sans">
-      {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/landing-bg.png"
@@ -25,9 +24,7 @@ export default async function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_100%)]" />
       </div>
 
-      {/* Content Wrapper */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
-        {/* Logo and Brand */}
         <div className="mb-10 flex flex-col items-center gap-8">
           <div className="relative">
             <div className="absolute -inset-4 rounded-full bg-white/10 blur-2xl opacity-50" />
@@ -48,10 +45,8 @@ export default async function Home() {
           </p>
         </div>
 
-        {/* Glassmorphic Call to Action (Client Component) */}
         <LandingSignInButton />
 
-        {/* Sub-footer features */}
         <div className="mt-32 grid grid-cols-1 gap-12 text-left sm:grid-cols-3 lg:gap-24 opacity-30 select-none pointer-events-none">
             <div className="space-y-4">
                 <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-300">Parallelized</h3>

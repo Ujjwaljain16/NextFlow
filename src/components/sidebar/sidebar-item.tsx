@@ -47,13 +47,13 @@ export function SidebarItem({
         )}
       </button>
 
-      {/* Custom Tooltip (only visible when collapsed & hovered) */}
+
       {collapsed && (
         <div className="absolute left-[56px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none drop-shadow-lg">
-          {/* Tooltip Arrow */}
+
           <div className="absolute top-1/2 -left-1 -translate-y-1/2 w-2 h-2 bg-white rotate-45 rounded-sm" />
 
-          {/* Tooltip Body */}
+
           <div className="bg-white text-black text-[13px] font-medium px-3 py-1.5 rounded-lg whitespace-nowrap shadow-xl">
             {label}
           </div>
