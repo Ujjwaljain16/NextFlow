@@ -6,7 +6,7 @@ import type { executeNodeTask } from "../../trigger/dag";
 export class OrchestratorService {
 
   /**
-   * 5. IDEMPOTENCY OF THE ORCHESTRATOR ITSELF:
+   * IDEMPOTENCY OF THE ORCHESTRATOR ITSELF:
    * Contract: `handleNodeCompletion` can run multiple times safely for the same node.
    * Duplicate completion events (or concurrent orchestrator calls) inherently fail safely during the INSERT step.
    */
@@ -36,7 +36,7 @@ export class OrchestratorService {
         select: { nodeId: true, status: true },
       });
 
-      // 1. "ALL DEPENDENCIES SATISFIED" MUST BE EXACT
+      // "ALL DEPENDENCIES SATISFIED" MUST BE EXACT
       // - Must find strictly matching row count to avoid missing rows returning empty arrays incorrectly as "ready".
       // - Must strictly check that every single dependency is "SUCCESS".
       const isReady =
@@ -62,7 +62,7 @@ export class OrchestratorService {
   }
 
   /**
-   * 3. MAKE THE INSERT THE SINGLE SOURCE OF TRUTH
+   * MAKE THE INSERT THE SINGLE SOURCE OF TRUTH
    * The atomic DB transaction that guarantees race-condition safety.
    */
   private static async safelyQueueNode(workflowRunId: string, nodeId: string): Promise<void> {
